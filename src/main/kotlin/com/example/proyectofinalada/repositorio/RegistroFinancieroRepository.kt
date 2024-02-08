@@ -1,4 +1,7 @@
 package com.example.proyectofinalada.repositorio
 
-interface RegistroFinancieroRepository {
+import com.example.proyectofinalada.modelo.RegistroFinanciero
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface RegistroFinancieroRepository : JpaRepository<RegistroFinanciero, Long> {
 }
