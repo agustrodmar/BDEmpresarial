@@ -3,7 +3,6 @@ package com.example.proyectofinalada.modelo
 import jakarta.persistence.*
 import org.springframework.data.annotation.Id
 
-
 @Entity
 data class Empresa(
     @jakarta.persistence.Id @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,6 +12,4 @@ data class Empresa(
 
     @OneToMany(mappedBy = "empresa", cascade = [CascadeType.ALL], orphanRemoval = true)
     val registros: List<RegistroFinanciero> = ArrayList()
-) {
-
-}
+)
