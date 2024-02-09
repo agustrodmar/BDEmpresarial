@@ -19,6 +19,7 @@ sealed class RegistroFinanciero(
     val concepto: String
 )
 
+// ACTIVO
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_activo")
@@ -27,42 +28,49 @@ open class Activo(
     concepto: String
 ) : RegistroFinanciero(empresa = empresa, concepto = concepto)
 
+// ACTIVO NO CORRIENTE
 @Entity
-@DiscriminatorValue("activo_corriente")
-class ActivoCorriente(
+@DiscriminatorValue("activo_no_corriente")
+open class ActivoNoCorriente(
     empresa: Empresa,
     concepto: String
 ) : Activo(empresa = empresa, concepto = concepto)
 
-// ACTIVO NO CORRIENTE
 @Entity
 @DiscriminatorValue("inmovilizado_intangible")
-class InmovilizadoIntangible(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class InmovilizadoIntangible(empresa: Empresa, concepto: String) : ActivoNoCorriente(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("inmovilizado_material")
-class InmovilizadoMaterial(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class InmovilizadoMaterial(empresa: Empresa, concepto: String) : ActivoNoCorriente(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("inmovilizado_financiero")
-class InmovilizadoFinanciero(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class InmovilizadoFinanciero(empresa: Empresa, concepto: String) : ActivoNoCorriente(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("amortizaciones")
-class Amortizaciones(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class Amortizaciones(empresa: Empresa, concepto: String) : ActivoNoCorriente(empresa = empresa, concepto = concepto)
 
 // ACTIVO CORRIENTE
 @Entity
+@DiscriminatorValue("activo_corriente")
+open class ActivoCorriente(
+    empresa: Empresa,
+    concepto: String
+) : Activo(empresa = empresa, concepto = concepto)
+
+@Entity
 @DiscriminatorValue("existencias")
-class Existencias(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class Existencias(empresa: Empresa, concepto: String) : ActivoCorriente(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("realizable")
-class Realizable(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class Realizable(empresa: Empresa, concepto: String) : ActivoCorriente(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("disponible")
-class Disponible(empresa: Empresa, concepto: String) : Activo(empresa = empresa, concepto = concepto)
+class Disponible(empresa: Empresa, concepto: String) : ActivoCorriente(empresa = empresa, concepto = concepto)
 
 // PASIVO
 @Entity
@@ -75,38 +83,48 @@ open class Pasivo(
 
 // NETO
 @Entity
+@DiscriminatorValue("neto")
+open class Neto(
+    empresa: Empresa,
+    concepto: String
+) : Pasivo(empresa = empresa, concepto = concepto)
+
+@Entity
 @DiscriminatorValue("capital")
-class Capital(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
+class Capital(empresa: Empresa, concepto: String) : Neto(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("reservas")
-class Reservas(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
+class Reservas(empresa: Empresa, concepto: String) : Neto(empresa = empresa, concepto = concepto)
 
-@Suppress("SpellCheckingInspection")
 @Entity
 @DiscriminatorValue("resultado_ejercicio")
-class ResultadoEjercicio(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
+class ResultadoEjercicio(empresa: Empresa, concepto: String) : Neto(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("subvenciones")
-class Subvenciones(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
-
+class Subvenciones(empresa: Empresa, concepto: String) : Neto(empresa = empresa, concepto = concepto)
 
 // PASIVO NO CORRIENTE
 @Entity
-@DiscriminatorValue("deudas_largo_plazo")
-class DeudasLargoPlazo(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
-
-
-// PASIVO CORRIENTE
+@DiscriminatorValue("pasivo_no_corriente")
+open class PasivoNoCorriente(
+    empresa: Empresa,
+    concepto: String
+) : Pasivo(empresa = empresa, concepto = concepto)
 
 @Entity
+@DiscriminatorValue("deudas_largo_plazo")
+class DeudasLargoPlazo(empresa: Empresa, concepto: String) : PasivoNoCorriente(empresa = empresa, concepto = concepto)
+
+// PASIVO CORRIENTE
+@Entity
 @DiscriminatorValue("pasivo_corriente")
-class PasivoCorriente(
+open class PasivoCorriente(
     empresa: Empresa,
     concepto: String
 ) : Pasivo(empresa = empresa, concepto = concepto)
 
 @Entity
 @DiscriminatorValue("deudas_corto_plazo")
-class DeudasCortoPlazo(empresa: Empresa, concepto: String) : Pasivo(empresa = empresa, concepto = concepto)
+class DeudasCortoPlazo(empresa: Empresa, concepto: String) : PasivoCorriente(empresa = empresa, concepto = concepto)
