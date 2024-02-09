@@ -5,7 +5,7 @@ import javafx.scene.Parent
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/MenuBienvenida.fxml"))
+val fxmlLoader = FXMLLoader(ProyectoFinalAdaApplication::class.java.getResource("/vista/MenuBienvenida.fxml"))
 val root = fxmlLoader.load<Parent>()
 
 @SpringBootApplication
