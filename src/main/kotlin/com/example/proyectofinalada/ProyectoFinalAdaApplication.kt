@@ -26,6 +26,7 @@ class ProyectoFinalAdaApplication : Application() {
         primaryStage.show()
     }
 
+
     override fun stop() {
         context.close()
     }

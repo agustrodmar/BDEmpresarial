@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="Pane" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.NuevaBaseDeDatosController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.NuevaBaseDeDatosController">
    <children>
       <TextField layoutX="48.0" layoutY="89.0" />
       <Label layoutX="47.0" layoutY="55.0" text="Añade el ID de tu empresa: " />
@@ -13,4 +13,6 @@
       <TextField layoutX="48.0" layoutY="187.0" />
       <Button layoutX="215.0" layoutY="271.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="138.0" text="guardar" />
    </children>
-</fx:root>
+</Pane>
+
+
