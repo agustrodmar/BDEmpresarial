@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class EmpresaService(private val empresaRepository: EmpresaRepository) {
 
     @Transactional()
-    fun encontratTodo(): List<Empresa> {
+    fun encontrarTodo(): List<Empresa> {
         return empresaRepository.findAll()
     }
 

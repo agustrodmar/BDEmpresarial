@@ -1,5 +1,6 @@
 package com.example.proyectofinalada.controlador
 
+import com.example.proyectofinalada.util.SpringControllerFactory
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -7,16 +8,22 @@ import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.stage.Stage
+import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
 
 
+
+
+
 @Controller
-class MenuBienvenidaController {
+class MenuBienvenidaController(private val context: ApplicationContext) {
+
     @FXML
     fun handleCrearNuevaBaseDeDatosButtonAction(event: ActionEvent) {
         try {
             // Carga la nueva vista
             val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/NuevaBaseDeDatos.fxml"))
+            fxmlLoader.controllerFactory = SpringControllerFactory(context)
             val root = fxmlLoader.load<Parent>()
 
             // Crea una nueva escena con la nueva vista y la muestra
@@ -31,10 +38,12 @@ class MenuBienvenidaController {
         }
     }
 
-
     @FXML
     fun handleUsarBaseDeDatosExistenteButtonAction(event: ActionEvent?) {
 
         println("Usar base de datos existente")
     }
 }
+
+
+
