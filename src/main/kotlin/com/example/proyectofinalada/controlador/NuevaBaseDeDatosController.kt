@@ -15,17 +15,17 @@ import org.springframework.stereotype.Controller
 class NuevaBaseDeDatosController(private val empresaService: EmpresaService) {
 
     @FXML
-    private lateinit var idField: TextField
-
-    @FXML
     private lateinit var nombreField: TextField
 
     @FXML
     fun handleGuardarButtonAction() {
-        val id = idField.text.toLong()
-        val nombre = nombreField.text
-
-        val nuevaEmpresa = Empresa(id = id, nombre = nombre)
-        empresaService.guardar(nuevaEmpresa)
+        try {
+            val nombre = nombreField.text
+            val nuevaEmpresa = Empresa(nombre = nombre)
+            val savedEmpresa = empresaService.guardar(nuevaEmpresa)
+            println("Empresa guardada: $savedEmpresa")
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
