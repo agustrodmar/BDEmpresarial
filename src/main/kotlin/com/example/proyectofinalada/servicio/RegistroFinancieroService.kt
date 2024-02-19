@@ -22,10 +22,8 @@ class RegistroFinancieroService(
     }
 
     @Transactional
-    fun guardar(empresa: Empresa): Empresa {
-        val savedEmpresa = empresaRepository.save(empresa)
-        println("Empresa guardada: $savedEmpresa")
-        return savedEmpresa
+    fun guardar(registroFinanciero: RegistroFinanciero): RegistroFinanciero {
+        return registroFinancieroRepository.save(registroFinanciero)
     }
 
 }

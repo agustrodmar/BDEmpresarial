@@ -39,10 +39,25 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
     }
 
     @FXML
-    fun handleUsarBaseDeDatosExistenteButtonAction(event: ActionEvent?) {
+    fun handleUsarBaseDeDatosExistenteButtonAction(event: ActionEvent) {
+        try {
+            // Carga la nueva vista
+            val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/SeleccionarEmpresa.fxml"))
+            fxmlLoader.controllerFactory = SpringControllerFactory(context)
+            val root = fxmlLoader.load<Parent>()
 
-        println("Usar base de datos existente")
+            // Crea una nueva escena con la nueva vista y la muestra
+            val stage = Stage()
+            stage.scene = Scene(root)
+            stage.show()
+
+            // Cierra la vista actual
+            (event.source as Node).scene.window.hide()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
+
 }
 
 
