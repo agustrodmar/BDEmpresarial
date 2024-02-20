@@ -1,5 +1,7 @@
 package com.example.proyectofinalada
 
+import com.example.proyectofinalada.controlador.EmpresaController
+import com.example.proyectofinalada.controlador.MenuBienvenidaController
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -14,6 +16,7 @@ class ProyectoFinalAdaApplication : Application() {
 
     private lateinit var context: ConfigurableApplicationContext
 
+
     override fun init() {
         context = SpringApplication.run(ProyectoFinalAdaApplication::class.java)
     }
@@ -22,6 +25,7 @@ class ProyectoFinalAdaApplication : Application() {
         val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/MenuBienvenida.fxml"))
         fxmlLoader.setControllerFactory { context.getBean(it) }
         val root = fxmlLoader.load<Parent>()
+        val controller = fxmlLoader.getController<MenuBienvenidaController>()
         primaryStage.scene = Scene(root)
         primaryStage.show()
     }

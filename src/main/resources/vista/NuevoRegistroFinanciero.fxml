@@ -13,5 +13,6 @@
       <Label layoutX="45.0" layoutY="183.0" text="Introduce el concepto para el registro financiero: " />
       <TextField fx:id="conceptoField" layoutX="337.0" layoutY="179.0" prefHeight="124.0" prefWidth="231.0" />
       <Button fx:id="guardarButton" layoutX="230.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleGuardarButtonAction" text="Guardar el registro" />
+      <Button layoutX="513.0" layoutY="350.0" mnemonicParsing="false" text="Atrás" />
    </children>
 </Pane>

@@ -26,4 +26,9 @@ class RegistroFinancieroService(
         return registroFinancieroRepository.save(registroFinanciero)
     }
 
+    @Transactional
+    fun eliminar(registroFinanciero: RegistroFinanciero) {
+        registroFinancieroRepository.delete(registroFinanciero)
+    }
+
 }

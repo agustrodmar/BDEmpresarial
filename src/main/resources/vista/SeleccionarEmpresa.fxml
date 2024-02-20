@@ -5,10 +5,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.EmpresaController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.SeleccionarEmpresaController">
    <children>
       <ComboBox id="empresaComboBox" fx:id="empresaComboBox" layoutX="225.0" layoutY="152.0" prefWidth="150.0" />
       <Label layoutX="251.0" layoutY="49.0" prefHeight="17.0" prefWidth="98.0" text="Elige tu empresa:" />
-      <Button layoutX="273.0" layoutY="243.0" mnemonicParsing="false" text="Cargar" />
+      <Button fx:id="cargarButton" layoutX="273.0" layoutY="243.0" mnemonicParsing="false" text="Cargar" />
+      <Button layoutX="502.0" layoutY="346.0" mnemonicParsing="false" text="Atrás" />
    </children>
 </Pane>

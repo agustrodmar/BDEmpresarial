@@ -5,20 +5,19 @@ import com.example.proyectofinalada.servicio.EmpresaService
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
 import javafx.scene.control.ComboBox
 import javafx.scene.control.ListView
 import org.springframework.stereotype.Controller
 import java.awt.TextField
 
+@Suppress("SpellCheckingInspection")
 @Controller
 class RegistroFinancieroController(private val registroFinancieroService: RegistroFinancieroService,
                                    private val empresaService: EmpresaService) {
 
+
     @FXML
     private lateinit var empresa: Empresa
-
 
     @FXML
     private lateinit var tipoRegistroComboBox: ComboBox<String>

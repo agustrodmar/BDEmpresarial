@@ -10,5 +10,6 @@
       <Label layoutX="196.0" layoutY="108.0" text="Añade el nombre de tu empresa:" />
       <TextField fx:id="nombreField" layoutX="204.0" layoutY="157.0" />
       <Button layoutX="215.0" layoutY="271.0" mnemonicParsing="false" onAction="#handleGuardarButtonAction" prefHeight="80.0" prefWidth="138.0" text="guardar" />
+      <Button layoutX="507.0" layoutY="339.0" mnemonicParsing="false" text="Atrás" />
    </children>
 </Pane>
