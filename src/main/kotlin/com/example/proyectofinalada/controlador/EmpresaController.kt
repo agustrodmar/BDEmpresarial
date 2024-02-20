@@ -3,17 +3,15 @@ package com.example.proyectofinalada.controlador
 import com.example.proyectofinalada.servicio.EmpresaService
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.scene.control.ComboBox
-import javafx.stage.Stage
+import org.springframework.stereotype.Controller
 import java.awt.TextField
 
 /**
  * El controlador que maneja los datos las empresas
  *
  */
+@Controller
 class EmpresaController(private val empresaService: EmpresaService, private val registroFinancieroController: RegistroFinancieroController) {
 
     @FXML
