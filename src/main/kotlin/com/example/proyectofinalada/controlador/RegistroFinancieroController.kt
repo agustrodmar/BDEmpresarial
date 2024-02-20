@@ -8,6 +8,7 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.control.ComboBox
+import javafx.scene.control.ListView
 import org.springframework.stereotype.Controller
 import java.awt.TextField
 
@@ -24,6 +25,12 @@ class RegistroFinancieroController(private val registroFinancieroService: Regist
 
     @FXML
     private lateinit var conceptoField: TextField
+
+    @FXML
+    private lateinit var registrosFinancierosList: ListView<RegistroFinanciero>
+
+    @FXML
+    private lateinit var registrosAEliminarList: ListView<RegistroFinanciero>
 
     fun setEmpresa(empresa: Empresa) {
         this.empresa = empresa
@@ -79,16 +86,22 @@ class RegistroFinancieroController(private val registroFinancieroService: Regist
 
     @FXML
     fun handleVerRegistrosButtonAction() {
-        // Obtiene todos los registros financieros
         val registrosFinancieros = registroFinancieroService.encontrarTodo()
 
-        // Muestra los registros financieros
-        registrosFinancieros.forEach { println(it) }
+        // Añade los registros financieros al ListView
+        registrosFinancierosList.items = FXCollections.observableArrayList(registrosFinancieros)
     }
 
     @FXML
     fun handleEliminarRegistroButtonAction() {
-        // Debo implementar la lógica para eliminar un registro financiero
-        // Buscar alguna forma de seleccionar qué registro financiero se debe eliminar
+        val registroSeleccionado = registrosAEliminarList.selectionModel.selectedItem
+
+        if (registroSeleccionado != null) {
+            // Elimina el registro financiero
+            registroFinancieroService.eliminar(registroSeleccionado)
+
+            // Actualiza el ListView
+            handleVerRegistrosButtonAction()
+        }
     }
 }
