@@ -12,9 +12,6 @@ import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
 
 
-
-
-
 @Controller
 class MenuBienvenidaController(private val context: ApplicationContext) {
 
@@ -59,6 +56,4 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
     }
 
 }
-
-
 

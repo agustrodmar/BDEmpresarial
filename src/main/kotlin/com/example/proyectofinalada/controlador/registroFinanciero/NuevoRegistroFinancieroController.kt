@@ -1,4 +1,4 @@
-package com.example.proyectofinalada.controlador
+package com.example.proyectofinalada.controlador.registroFinanciero
 
 import com.example.proyectofinalada.modelo.*
 import com.example.proyectofinalada.servicio.EmpresaService
@@ -6,15 +6,18 @@ import com.example.proyectofinalada.servicio.RegistroFinancieroService
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.ComboBox
-import javafx.scene.control.ListView
+import javafx.scene.control.TextField
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
-import java.awt.TextField
 
-@Suppress("SpellCheckingInspection")
 @Controller
-class RegistroFinancieroController(private val registroFinancieroService: RegistroFinancieroService,
-                                   private val empresaService: EmpresaService) {
+class NuevoRegistroFinancieroController {
 
+    @Autowired
+    private lateinit var registroFinancieroService: RegistroFinancieroService
+
+    @Autowired
+    private lateinit var empresaService: EmpresaService
 
     @FXML
     private lateinit var empresa: Empresa
@@ -24,16 +27,6 @@ class RegistroFinancieroController(private val registroFinancieroService: Regist
 
     @FXML
     private lateinit var conceptoField: TextField
-
-    @FXML
-    private lateinit var registrosFinancierosList: ListView<RegistroFinanciero>
-
-    @FXML
-    private lateinit var registrosAEliminarList: ListView<RegistroFinanciero>
-
-    fun setEmpresa(empresa: Empresa) {
-        this.empresa = empresa
-    }
 
     fun initialize() {
         tipoRegistroComboBox.items = FXCollections.observableArrayList(
@@ -52,6 +45,7 @@ class RegistroFinancieroController(private val registroFinancieroService: Regist
             "Pasivo Corriente"
         )
     }
+
 
     @FXML
     fun handleGuardarButtonAction() {
@@ -80,27 +74,6 @@ class RegistroFinancieroController(private val registroFinancieroService: Regist
         // Guarda el registro financiero
         if (registroFinanciero != null) {
             registroFinancieroService.guardar(registroFinanciero)
-        }
-    }
-
-    @FXML
-    fun handleVerRegistrosButtonAction() {
-        val registrosFinancieros = registroFinancieroService.encontrarTodo()
-
-        // Añade los registros financieros al ListView
-        registrosFinancierosList.items = FXCollections.observableArrayList(registrosFinancieros)
-    }
-
-    @FXML
-    fun handleEliminarRegistroButtonAction() {
-        val registroSeleccionado = registrosAEliminarList.selectionModel.selectedItem
-
-        if (registroSeleccionado != null) {
-            // Elimina el registro financiero
-            registroFinancieroService.eliminar(registroSeleccionado)
-
-            // Actualiza el ListView
-            handleVerRegistrosButtonAction()
         }
     }
 }

@@ -6,7 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.RegistroFinancieroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.proyectofinalada.controlador.registroFinanciero.NuevoRegistroFinancieroController">
    <children>
       <Label layoutX="45.0" layoutY="60.0" text="Introduce un registro financiero" />
       <ComboBox fx:id="tipoRegistroComboBox" layoutX="45.0" layoutY="110.0" prefWidth="150.0" />

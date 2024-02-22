@@ -15,21 +15,24 @@ import org.springframework.context.ConfigurableApplicationContext
 class ProyectoFinalAdaApplication : Application() {
 
     private lateinit var context: ConfigurableApplicationContext
-
+    private lateinit var primaryStage: Stage
 
     override fun init() {
         context = SpringApplication.run(ProyectoFinalAdaApplication::class.java)
     }
 
     override fun start(primaryStage: Stage) {
+        this.primaryStage = primaryStage // Guarda la referencia a primaryStage
+        showMenuBienvenida()
+    }
+
+    fun showMenuBienvenida() {
         val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/MenuBienvenida.fxml"))
         fxmlLoader.setControllerFactory { context.getBean(it) }
         val root = fxmlLoader.load<Parent>()
-        val controller = fxmlLoader.getController<MenuBienvenidaController>()
         primaryStage.scene = Scene(root)
         primaryStage.show()
     }
-
 
     override fun stop() {
         context.close()
