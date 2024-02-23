@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registros Financieros</title>
+</head>
+<body>
+    <h1>Registros Financieros</h1>
+    <table>
+        <tr>
+            <th>Concepto</th>
+            <th>Cantidad</th>
+        </tr>
+        <tr th:each="registro : ${registrosFinancieros}">
+            <td th:text="${registro.concepto}"></td>
+            <td th:text="${registro.cantidad}"></td>
+        </tr>
+    </table>
+</body>
+</html>
