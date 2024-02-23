@@ -6,15 +6,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.proyectofinalada.controlador.registroFinanciero.NuevoRegistroFinancieroController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.proyectofinalada.controlador.registroFinanciero.NuevoRegistroFinancieroController">
    <children>
       <Label layoutX="45.0" layoutY="60.0" text="Introduce un registro financiero" />
       <ComboBox fx:id="tipoRegistroComboBox" layoutX="45.0" layoutY="110.0" prefWidth="150.0" />
       <Label layoutX="45.0" layoutY="183.0" text="Introduce el concepto para el registro financiero: " />
-      <TextField fx:id="conceptoField" layoutX="337.0" layoutY="179.0" prefHeight="124.0" prefWidth="231.0" />
-      <Button fx:id="guardarButton" layoutX="230.0" layoutY="336.0" mnemonicParsing="false" onAction="#handleGuardarButtonAction" text="Guardar el registro" />
-      <Button layoutX="513.0" layoutY="350.0" mnemonicParsing="false" text="Atrás" />
+      <TextField fx:id="conceptoField" layoutX="337.0" layoutY="179.0" prefHeight="26.0" prefWidth="231.0" />
+      <Button fx:id="guardarButton" layoutX="219.0" layoutY="286.0" mnemonicParsing="false" onAction="#handleGuardarButtonAction" text="Guardar el registro" />
+      <Button fx:id="volverAlMenuButton" layoutX="476.0" layoutY="336.0" mnemonicParsing="false" text="Volver a inicio" />
+      <TextField fx:id="cantidadField" layoutX="337.0" layoutY="225.0" prefHeight="26.0" prefWidth="231.0" />
+      <Label layoutX="45.0" layoutY="230.0" prefHeight="17.0" prefWidth="202.0" text="Intoduce la cantidad:" />
    </children>
 </Pane>

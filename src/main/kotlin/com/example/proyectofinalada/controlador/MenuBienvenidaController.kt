@@ -20,7 +20,6 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
     fun handleCrearNuevaBaseDeDatosButtonAction(event: ActionEvent) {
         try {
             Navigator.loadScene("/vista/NuevaBaseDeDatos.fxml", context)
-            (event.source as Node).scene.window.hide()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -30,7 +29,6 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
     fun handleUsarBaseDeDatosExistenteButtonAction(event: ActionEvent) {
         try {
             Navigator.loadScene("/vista/SeleccionarEmpresa.fxml", context)
-            (event.source as Node).scene.window.hide()
         } catch (e: Exception) {
             e.printStackTrace()
         }

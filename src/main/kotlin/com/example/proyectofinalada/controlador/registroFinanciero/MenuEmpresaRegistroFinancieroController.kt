@@ -1,12 +1,9 @@
 package com.example.proyectofinalada.controlador.registroFinanciero
 
 import com.example.proyectofinalada.modelo.*
+import com.example.proyectofinalada.util.Navigator
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.scene.control.Button
-import javafx.stage.Stage
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
@@ -27,37 +24,28 @@ class MenuEmpresaRegistroFinancieroController {
     private lateinit var verRegistrosFinancierosButton: Button
 
     @FXML
-    private lateinit var añadirRegistrosFinancierosButton: Button
+    private lateinit var NuevoRegistrosFinancierosButton: Button
 
     @FXML
     private lateinit var eliminarRegistrosFinancierosButton: Button
+
+    @FXML
+    private lateinit var volverAlMenuButton: Button
 
     @FXML
     fun setEmpresa(empresa: Empresa) {
         this.empresa = empresa
     }
 
-    @FXML
-    fun initialize() {
-        verRegistrosFinancierosButton.setOnAction { navigateTo("/vista/RegistrosFinancieros.fxml") }
-        añadirRegistrosFinancierosButton.setOnAction { navigateTo("/vista/NuevoRegistroFinanciero.fxml") }
-        eliminarRegistrosFinancierosButton.setOnAction { navigateTo("/vista/EliminarRegistro.fxml") }
+    fun handleVolverAlMenuButtonAction() {
+        Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
     }
 
-    private fun navigateTo(viewPath: String) {
-        try {
-            val fxmlLoader = FXMLLoader(javaClass.getResource(viewPath))
-            fxmlLoader.setControllerFactory { context.getBean(it) }
-            val root = fxmlLoader.load<Parent>()
-
-            val stage = Stage()
-            stage.scene = Scene(root)
-            stage.show()
-
-            // Cierra la vista actual
-            (verRegistrosFinancierosButton.scene.window as Stage).close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+    @FXML
+    fun initialize() {
+        volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
+        verRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/RegistrosFinancieros.fxml", context) }
+        NuevoRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/NuevoRegistroFinanciero.fxml", context) }
+        eliminarRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/EliminarRegistro.fxml", context) }
     }
 }
