@@ -30,7 +30,11 @@ open class Activo(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 // ACTIVO NO CORRIENTE
 @Entity
@@ -39,35 +43,55 @@ open class ActivoNoCorriente(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 @Entity
 @DiscriminatorValue("inmovilizado_intangible")
 class InmovilizadoIntangible(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("inmovilizado_material")
 class InmovilizadoMaterial(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("inmovilizado_financiero")
 class InmovilizadoFinanciero(
     empresa: Empresa,
     concepto: String,
-    cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("amortizaciones")
 class Amortizaciones(
     empresa: Empresa,
     concepto: String,
-    cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 // ACTIVO CORRIENTE
 @Entity
@@ -76,28 +100,44 @@ open class ActivoCorriente(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 @Entity
 @DiscriminatorValue("existencias")
 class Existencias(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("realizable")
 class Realizable(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("disponible")
 class Disponible(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 // PASIVO
 @Entity
@@ -107,7 +147,11 @@ open class Pasivo(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 // NETO
 @Entity
@@ -116,35 +160,55 @@ open class Neto(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 @Entity
 @DiscriminatorValue("capital")
 class Capital(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("reservas")
 class Reservas(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("resultado_ejercicio")
 class ResultadoEjercicio(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 @Entity
 @DiscriminatorValue("subvenciones")
 class Subvenciones(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+    }
 
 // PASIVO NO CORRIENTE
 @Entity
@@ -153,13 +217,22 @@ open class PasivoNoCorriente(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 @Entity
 @DiscriminatorValue("deudas_largo_plazo")
 class DeudasLargoPlazo(empresa: Empresa,
                        concepto: String,
-                       cantidad: BigDecimal) : PasivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+                       cantidad: BigDecimal
+) : PasivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 // PASIVO CORRIENTE
 @Entity
@@ -168,11 +241,19 @@ open class PasivoCorriente(
     empresa: Empresa,
     concepto: String,
     cantidad: BigDecimal
-) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad)
+) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}
 
 @Entity
 @DiscriminatorValue("deudas_corto_plazo")
 class DeudasCortoPlazo(
     empresa: Empresa,
     concepto: String,
-    cantidad: BigDecimal) : PasivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad)
+    cantidad: BigDecimal) : PasivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
+    override fun toString(): String {
+        return "$concepto ${cantidad} euros"
+    }
+}

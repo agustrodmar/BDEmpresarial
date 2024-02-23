@@ -3,7 +3,9 @@ package com.example.proyectofinalada.controlador.registroFinanciero
 import com.example.proyectofinalada.modelo.Empresa
 import com.example.proyectofinalada.modelo.RegistroFinanciero
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
+import com.example.proyectofinalada.servicio.empresa.EmpresaActualService
 import com.example.proyectofinalada.util.Navigator
+import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.Button
@@ -19,6 +21,9 @@ class EliminarRegistroFinancieroController {
     private lateinit var registroFinancieroService: RegistroFinancieroService
 
     @Autowired
+    private lateinit var empresaActualService: EmpresaActualService
+
+    @Autowired
     private lateinit var context: ApplicationContext
 
     @FXML
@@ -28,11 +33,15 @@ class EliminarRegistroFinancieroController {
     private lateinit var volverAlMenuButton: Button
 
     @FXML
-    private lateinit var empresa: Empresa
+    fun initialize() {
+        volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
 
-
-    fun setEmpresa(empresa: Empresa) {
-        this.empresa = empresa
+        // Carga los registros financieros de la empresa seleccionada
+        val empresa = empresaActualService.getEmpresa()
+        if (empresa != null) {
+            val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
+            registrosAEliminarList.items = FXCollections.observableArrayList(registrosFinancieros)
+        }
     }
 
     fun handleVolverAlMenuButtonAction() {
@@ -47,10 +56,5 @@ class EliminarRegistroFinancieroController {
             // Elimina el registro financiero
             registroFinancieroService.eliminar(registroSeleccionado)
         }
-    }
-
-    fun initialize() {
-
-        volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
     }
 }

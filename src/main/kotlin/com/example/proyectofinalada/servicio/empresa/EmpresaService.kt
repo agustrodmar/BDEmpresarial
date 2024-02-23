@@ -1,4 +1,4 @@
-package com.example.proyectofinalada.servicio
+package com.example.proyectofinalada.servicio.empresa
 
 import com.example.proyectofinalada.modelo.Empresa
 import com.example.proyectofinalada.repositorio.EmpresaRepository

@@ -31,4 +31,8 @@ class RegistroFinancieroService(
         registroFinancieroRepository.delete(registroFinanciero)
     }
 
+    fun encontrarPorEmpresa(empresa: Empresa): List<RegistroFinanciero> {
+        return registroFinancieroRepository.findByEmpresa(empresa)
+    }
+
 }

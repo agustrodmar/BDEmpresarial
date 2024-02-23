@@ -1,15 +1,10 @@
 package com.example.proyectofinalada.controlador
 
-import com.example.proyectofinalada.ProyectoFinalAdaApplication
 import com.example.proyectofinalada.modelo.Empresa
-import com.example.proyectofinalada.servicio.EmpresaService
+import com.example.proyectofinalada.servicio.empresa.EmpresaService
 import com.example.proyectofinalada.util.Navigator
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.scene.control.TextField
-import javafx.stage.Stage
 import org.springframework.stereotype.Controller
 import org.springframework.context.ApplicationContext
 import org.springframework.beans.factory.annotation.Autowired

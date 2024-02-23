@@ -1,8 +1,9 @@
 package com.example.proyectofinalada.controlador.registroFinanciero
 
 import com.example.proyectofinalada.modelo.*
-import com.example.proyectofinalada.servicio.EmpresaService
+import com.example.proyectofinalada.servicio.empresa.EmpresaService
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
+import com.example.proyectofinalada.servicio.empresa.EmpresaActualService
 import com.example.proyectofinalada.util.Navigator
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
@@ -22,10 +23,7 @@ class NuevoRegistroFinancieroController {
     private lateinit var registroFinancieroService: RegistroFinancieroService
 
     @Autowired
-    private lateinit var empresaService: EmpresaService
-
-    @FXML
-    private lateinit var empresa: Empresa
+    private lateinit var empresaActualService: EmpresaActualService
 
     @FXML
     private lateinit var tipoRegistroComboBox: ComboBox<String>
@@ -58,8 +56,6 @@ class NuevoRegistroFinancieroController {
             "Subvenciones",
             "Pasivo No Corriente",
             "Pasivo Corriente"
-
-
         )
     }
 
@@ -67,38 +63,37 @@ class NuevoRegistroFinancieroController {
         Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
     }
 
-    fun setEmpresa(empresa: Empresa) {
-        this.empresa = empresa
-    }
-
     @FXML
     fun handleGuardarButtonAction() {
-        val tipoRegistro = tipoRegistroComboBox.selectionModel.selectedItem
-        val concepto = conceptoField.text
-        val cantidad = BigDecimal(cantidadField.text)
+        val empresa = empresaActualService.getEmpresa()
+        if (empresa != null) {
+            val tipoRegistro = tipoRegistroComboBox.selectionModel.selectedItem
+            val concepto = conceptoField.text
+            val cantidad = BigDecimal(cantidadField.text)
 
-        // Crea un nuevo registro financiero basado en el tipo seleccionado
-        val registroFinanciero = when (tipoRegistro) {
-            "Inmovilizado intangible" -> InmovilizadoIntangible(empresa, concepto, cantidad)
-            "Inmovilizado material" -> InmovilizadoMaterial(empresa, concepto, cantidad)
-            "Inmovilizado financiero" -> InmovilizadoFinanciero(empresa, concepto, cantidad)
-            "Amortizaciones" -> Amortizaciones(empresa, concepto, cantidad)
-            "Existencias" -> Existencias(empresa, concepto, cantidad)
-            "Realizable" -> Realizable(empresa, concepto, cantidad)
-            "Disponible o efectivo" -> Disponible(empresa, concepto, cantidad)
-            "Capital" -> Capital(empresa, concepto, cantidad)
-            "Reservas" -> Reservas(empresa, concepto, cantidad)
-            "Resultado del ejercicio" -> ResultadoEjercicio(empresa, concepto, cantidad)
-            "Subveciones" -> Subvenciones(empresa, concepto, cantidad)
-            "Pasivo No Corriente" -> PasivoNoCorriente(empresa, concepto, cantidad)
-            "Pasivo Corriente" -> PasivoCorriente(empresa, concepto, cantidad)
+            // Crea un nuevo registro financiero basado en el tipo seleccionado
+            val registroFinanciero = when (tipoRegistro) {
+                "Inmovilizado intangible" -> InmovilizadoIntangible(empresa, concepto, cantidad)
+                "Inmovilizado material" -> InmovilizadoMaterial(empresa, concepto, cantidad)
+                "Inmovilizado financiero" -> InmovilizadoFinanciero(empresa, concepto, cantidad)
+                "Amortizaciones" -> Amortizaciones(empresa, concepto, cantidad)
+                "Existencias" -> Existencias(empresa, concepto, cantidad)
+                "Realizable" -> Realizable(empresa, concepto, cantidad)
+                "Disponible o efectivo" -> Disponible(empresa, concepto, cantidad)
+                "Capital" -> Capital(empresa, concepto, cantidad)
+                "Reservas" -> Reservas(empresa, concepto, cantidad)
+                "Resultado del ejercicio" -> ResultadoEjercicio(empresa, concepto, cantidad)
+                "Subvenciones" -> Subvenciones(empresa, concepto, cantidad)
+                "Pasivo No Corriente" -> PasivoNoCorriente(empresa, concepto, cantidad)
+                "Pasivo Corriente" -> PasivoCorriente(empresa, concepto, cantidad)
 
-            else -> null
-        }
+                else -> null
+            }
 
-        // Guarda el registro financiero
-        if (registroFinanciero != null) {
-            registroFinancieroService.guardar(registroFinanciero)
+            // Guarda el registro financiero
+            if (registroFinanciero != null) {
+                registroFinancieroService.guardar(registroFinanciero)
+            }
         }
     }
 }
