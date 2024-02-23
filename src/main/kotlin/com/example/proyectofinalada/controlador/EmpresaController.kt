@@ -4,6 +4,7 @@ import com.example.proyectofinalada.ProyectoFinalAdaApplication
 import com.example.proyectofinalada.controlador.registroFinanciero.MenuEmpresaRegistroFinancieroController
 import com.example.proyectofinalada.controlador.registroFinanciero.NuevoRegistroFinancieroController
 import com.example.proyectofinalada.servicio.EmpresaService
+import com.example.proyectofinalada.util.Navigator
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
@@ -41,21 +42,7 @@ class EmpresaController(private val empresaService: EmpresaService, private val 
     @FXML
     fun handleAtrasButtonAction() {
         try {
-            // Obtén una referencia a ProyectoFinalAdaApplication
-            val app = context.getBean(ProyectoFinalAdaApplication::class.java)
-
-            // Carga la vista de bienvenida
-            val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/MenuBienvenida.fxml"))
-            fxmlLoader.setControllerFactory { context.getBean(it) }
-            val root = fxmlLoader.load<Parent>()
-
-            // Crea una nueva escena con la vista de bienvenida y la muestra
-            val stage = Stage()
-            stage.scene = Scene(root)
-            stage.show()
-
-            // Cierra la vista actual
-            primaryStage.close()
+            Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -80,11 +67,7 @@ class EmpresaController(private val empresaService: EmpresaService, private val 
         }
 
         cargarButton.setOnAction {
-            val fxmlLoader = FXMLLoader(javaClass.getResource("/vista/MenuEmpresaRegistro.fxml"))
-            val root = fxmlLoader.load<Parent>()
-            val stage = Stage()
-            stage.scene = Scene(root)
-            stage.show()
+            Navigator.loadScene("/vista/MenuEmpresaRegistro.fxml", context)
         }
     }
 }
