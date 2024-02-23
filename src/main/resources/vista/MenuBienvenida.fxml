@@ -9,5 +9,6 @@
       <Label layoutX="40.0" layoutY="39.0" prefHeight="107.0" prefWidth="546.0" text="Bienvendido al programa de gestor de Balances financieros para empresas de Acceso a Datos." />
       <Button layoutX="148.0" layoutY="153.0" mnemonicParsing="false" onAction="#handleCrearNuevaBaseDeDatosButtonAction" prefHeight="25.0" prefWidth="305.0" text="Crear una Base de Datos para una empresa nueva" />
       <Button layoutX="148.0" layoutY="222.0" mnemonicParsing="false" onAction="#handleUsarBaseDeDatosExistenteButtonAction" text="Usar una Base de Datos de una empresa ya existente" />
+      <Button fx:id="ajustaTuBaseDeDatosButton" layoutX="40.0" layoutY="324.0" onAction="#handleAjustaTuBaseDeDatosButtonAction" mnemonicParsing="false" text="Ajusta tu Base de Datos" />
    </children>
 </Pane>

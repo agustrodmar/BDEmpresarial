@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.control.Button
 import javafx.stage.Stage
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller
 
 @Controller
 class MenuBienvenidaController(private val context: ApplicationContext) {
+
+    @FXML
+    private lateinit var ajustaTuBaseDeDatosButton: Button
 
     @FXML
     fun handleCrearNuevaBaseDeDatosButtonAction(event: ActionEvent) {
@@ -32,5 +36,10 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    @FXML
+    private fun handleAjustaTuBaseDeDatosButtonAction() {
+        Navigator.loadScene("/vista/ApplicationSettings.fxml", context)
     }
 }
