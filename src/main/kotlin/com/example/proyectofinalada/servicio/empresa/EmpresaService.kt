@@ -7,19 +7,44 @@ import org.springframework.stereotype.Service
 
 
 /**
- * Aquí la lógica de negocio de Empresa
+ * Servicio para interactuar con las empresas en la base de datos.
+ *
+ * Este servicio proporciona métodos para encontrar todas las empresas y guardar una nueva empresa.
+ *
+ * @property empresaRepository El repositorio para interactuar con las empresas en la base de datos.
  */
 @Service
 class EmpresaService(private val empresaRepository: EmpresaRepository) {
 
+    /**
+     * Encuentra todas las empresas en la base de datos.
+     *
+     * @return Una lista de todas las empresas.
+     */
     @Transactional()
     fun encontrarTodo(): List<Empresa> {
-        return empresaRepository.findAll()
+        return try {
+            empresaRepository.findAll()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
     }
 
+    /**
+     * Guarda una nueva empresa en la base de datos.
+     *
+     * @param empresa La empresa a guardar.
+     * @return La empresa guardada.
+     */
     @Transactional
     fun guardar(empresa: Empresa): Empresa {
-        return empresaRepository.save(empresa)
+        return try {
+            empresaRepository.save(empresa)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            empresa
+        }
     }
-
 }
+

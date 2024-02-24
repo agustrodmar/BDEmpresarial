@@ -1,6 +1,5 @@
 package com.example.proyectofinalada.controlador.registroFinanciero
 
-import com.example.proyectofinalada.modelo.*
 import com.example.proyectofinalada.util.Navigator
 import javafx.fxml.FXML
 import javafx.scene.control.Button
@@ -9,7 +8,12 @@ import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
 
 
-
+/**
+ * Controlador para el menú de registros financieros de una empresa.
+ *
+ * Este controlador maneja las acciones del usuario en el menú de registros financieros,
+ * como ver, añadir y eliminar registros financieros.
+ */
 @Suppress("SpellCheckingInspection")
 @Controller
 class MenuEmpresaRegistroFinancieroController {
@@ -18,13 +22,10 @@ class MenuEmpresaRegistroFinancieroController {
     private lateinit var context: ApplicationContext
 
     @FXML
-    private lateinit var empresa: Empresa
-
-    @FXML
     private lateinit var verRegistrosFinancierosButton: Button
 
     @FXML
-    private lateinit var NuevoRegistrosFinancierosButton: Button
+    private lateinit var nuevoRegistrosFinancierosButton: Button
 
     @FXML
     private lateinit var eliminarRegistrosFinancierosButton: Button
@@ -32,20 +33,31 @@ class MenuEmpresaRegistroFinancieroController {
     @FXML
     private lateinit var volverAlMenuButton: Button
 
-    @FXML
-    fun setEmpresa(empresa: Empresa) {
-        this.empresa = empresa
-    }
 
+    /**
+     * Maneja la acción del botón para volver al menú.
+     *
+     * Cuando el usuario hace clic en el botón para volver al menú, este método carga la escena del menú de bienvenida.
+     */
     fun handleVolverAlMenuButtonAction() {
-        Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        try {
+            Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
+    /**
+     * Inicializa el controlador.
+     *
+     * Este método se llama después de que se ha cargado el archivo FXML. Aquí es donde se realiza cualquier
+     * inicialización necesaria para el controlador.
+     */
     @FXML
     fun initialize() {
         volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
         verRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/RegistrosFinancieros.fxml", context) }
-        NuevoRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/NuevoRegistroFinanciero.fxml", context) }
+        nuevoRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/NuevoRegistroFinanciero.fxml", context) }
         eliminarRegistrosFinancierosButton.setOnAction { Navigator.loadScene("/vista/EliminarRegistro.fxml", context) }
     }
 }

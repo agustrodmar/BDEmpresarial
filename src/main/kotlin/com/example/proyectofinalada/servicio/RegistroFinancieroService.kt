@@ -8,7 +8,13 @@ import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
 /**
- * Aquí la lógica de negocio de Registro Financiero
+ * Servicio para interactuar con los registros financieros en la base de datos.
+ *
+ * Este servicio proporciona métodos para encontrar todos los registros financieros, guardar un nuevo registro financiero,
+ * eliminar un registro financiero y encontrar registros financieros por empresa.
+ *
+ * @property registroFinancieroRepository El repositorio para interactuar con los registros financieros en la base de datos.
+ * @property empresaRepository El repositorio para interactuar con las empresas en la base de datos.
  */
 @Service
 class RegistroFinancieroService(
@@ -16,23 +22,48 @@ class RegistroFinancieroService(
     private val empresaRepository: EmpresaRepository
 ) {
 
-    @Transactional()
-    fun encontrarTodo(): List<RegistroFinanciero> {
-        return registroFinancieroRepository.findAll()
-    }
-
+    /**
+     * Guarda un nuevo registro financiero en la base de datos.
+     *
+     * @param registroFinanciero El registro financiero a guardar.
+     * @return El registro financiero guardado.
+     */
     @Transactional
     fun guardar(registroFinanciero: RegistroFinanciero): RegistroFinanciero {
-        return registroFinancieroRepository.save(registroFinanciero)
+        return try {
+            registroFinancieroRepository.save(registroFinanciero)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            registroFinanciero
+        }
     }
 
+    /**
+     * Elimina un registro financiero de la base de datos.
+     *
+     * @param registroFinanciero El registro financiero a eliminar.
+     */
     @Transactional
     fun eliminar(registroFinanciero: RegistroFinanciero) {
-        registroFinancieroRepository.delete(registroFinanciero)
+        try {
+            registroFinancieroRepository.delete(registroFinanciero)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
+    /**
+     * Encuentra los registros financieros de una empresa específica.
+     *
+     * @param empresa La empresa cuyos registros financieros se van a encontrar.
+     * @return Una lista de los registros financieros de la empresa.
+     */
     fun encontrarPorEmpresa(empresa: Empresa): List<RegistroFinanciero> {
-        return registroFinancieroRepository.findByEmpresa(empresa)
+        return try {
+            registroFinancieroRepository.findByEmpresa(empresa)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emptyList()
+        }
     }
-
 }

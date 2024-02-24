@@ -67,7 +67,7 @@ class InmovilizadoMaterial(
     concepto: String,
     cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -78,7 +78,7 @@ class InmovilizadoFinanciero(
     concepto: String,
     cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -89,7 +89,7 @@ class Amortizaciones(
     concepto: String,
     cantidad : BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -102,7 +102,7 @@ open class ActivoCorriente(
     cantidad: BigDecimal
 ) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -113,7 +113,7 @@ class Existencias(
     concepto: String,
     cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -124,7 +124,7 @@ class Realizable(
     concepto: String,
     cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -135,7 +135,7 @@ class Disponible(
     concepto: String,
     cantidad: BigDecimal) : ActivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -149,7 +149,7 @@ open class Pasivo(
     cantidad: BigDecimal
 ) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -162,7 +162,7 @@ open class Neto(
     cantidad: BigDecimal
 ) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -173,7 +173,7 @@ class Capital(
     concepto: String,
     cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -184,7 +184,7 @@ class Reservas(
     concepto: String,
     cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -195,7 +195,7 @@ class ResultadoEjercicio(
     concepto: String,
     cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -206,7 +206,7 @@ class Subvenciones(
     concepto: String,
     cantidad: BigDecimal) : Neto(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 
@@ -219,7 +219,7 @@ open class PasivoNoCorriente(
     cantidad: BigDecimal
 ) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -230,7 +230,7 @@ class DeudasLargoPlazo(empresa: Empresa,
                        cantidad: BigDecimal
 ) : PasivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -243,7 +243,7 @@ open class PasivoCorriente(
     cantidad: BigDecimal
 ) : Pasivo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -254,6 +254,6 @@ class DeudasCortoPlazo(
     concepto: String,
     cantidad: BigDecimal) : PasivoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }

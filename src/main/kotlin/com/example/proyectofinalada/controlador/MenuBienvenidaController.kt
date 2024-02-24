@@ -1,25 +1,31 @@
 package com.example.proyectofinalada.controlador
 
 import com.example.proyectofinalada.util.Navigator
-import com.example.proyectofinalada.util.SpringControllerFactory
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Node
-import javafx.scene.Parent
-import javafx.scene.Scene
-import javafx.scene.control.Button
-import javafx.stage.Stage
 import org.springframework.context.ApplicationContext
 import org.springframework.stereotype.Controller
 
 
+/**
+ * Controlador para el menú de bienvenida.
+ *
+ * Este controlador maneja las acciones del usuario en la pantalla de bienvenida,
+ * como crear una nueva base de datos, usar una base de datos existente y ajustar la base de datos.
+ *
+ * @property context El contexto de la aplicación.
+ */
 @Controller
 class MenuBienvenidaController(private val context: ApplicationContext) {
 
-    @FXML
-    private lateinit var ajustaTuBaseDeDatosButton: Button
 
+    /**
+     * Maneja la acción del botón para crear una nueva base de datos.
+     *
+     * Cuando el usuario hace clic en el botón para crear una nueva base de datos, este método carga la escena de creación de una nueva base de datos.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     fun handleCrearNuevaBaseDeDatosButtonAction(event: ActionEvent) {
         try {
@@ -29,6 +35,13 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
         }
     }
 
+    /**
+     * Maneja la acción del botón para usar una base de datos existente.
+     *
+     * Cuando el usuario hace clic en el botón para usar una base de datos existente, este método carga la escena de selección de empresa.
+     *
+     * @param event El evento de acción.
+     */
     @FXML
     fun handleUsarBaseDeDatosExistenteButtonAction(event: ActionEvent) {
         try {
@@ -36,10 +49,5 @@ class MenuBienvenidaController(private val context: ApplicationContext) {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    @FXML
-    private fun handleAjustaTuBaseDeDatosButtonAction() {
-        Navigator.loadScene("/vista/ApplicationSettings.fxml", context)
     }
 }

@@ -1,7 +1,6 @@
 package com.example.proyectofinalada.controlador.registroFinanciero
 
 import com.example.proyectofinalada.modelo.*
-import com.example.proyectofinalada.servicio.empresa.EmpresaService
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
 import com.example.proyectofinalada.servicio.empresa.EmpresaActualService
 import com.example.proyectofinalada.util.Navigator
@@ -16,6 +15,19 @@ import org.springframework.stereotype.Controller
 import java.math.BigDecimal
 
 
+
+/**
+ * Controlador para la creación de un nuevo registro financiero.
+ *
+ * Este controlador maneja las acciones del usuario en la pantalla de creación de un nuevo registro financiero,
+ * como seleccionar el tipo de registro, introducir el concepto y la cantidad, y guardar el nuevo registro.
+ */
+/**
+ * Controlador para la creación de un nuevo registro financiero.
+ *
+ * Este controlador maneja las acciones del usuario en la pantalla de creación de un nuevo registro financiero,
+ * como seleccionar el tipo de registro, introducir el concepto y la cantidad, y guardar el nuevo registro.
+ */
 @Controller
 class NuevoRegistroFinancieroController {
 
@@ -40,6 +52,12 @@ class NuevoRegistroFinancieroController {
     @FXML
     private lateinit var volverAlMenuButton: Button
 
+    /**
+     * Inicializa el controlador.
+     *
+     * Este método se llama después de que se ha cargado el archivo FXML. Aquí es donde puedes realizar cualquier
+     * inicialización necesaria para tu controlador.
+     */
     fun initialize() {
         volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
         tipoRegistroComboBox.items = FXCollections.observableArrayList(
@@ -59,10 +77,26 @@ class NuevoRegistroFinancieroController {
         )
     }
 
+    /**
+     * Maneja la acción del botón para volver al menú.
+     *
+     * Cuando el usuario hace clic en el botón para volver al menú, este método carga la escena del menú de bienvenida.
+     */
     fun handleVolverAlMenuButtonAction() {
-        Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        try {
+            Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
+    /**
+     * Maneja la acción del botón para guardar un nuevo registro financiero.
+     *
+     * Cuando el usuario hace clic en el botón para guardar un nuevo registro financiero, este método crea un nuevo
+     * registro financiero basado en el tipo seleccionado y los datos introducidos por el usuario, y luego guarda el
+     * nuevo registro.
+     */
     @FXML
     fun handleGuardarButtonAction() {
         val empresa = empresaActualService.getEmpresa()
@@ -92,7 +126,11 @@ class NuevoRegistroFinancieroController {
 
             // Guarda el registro financiero
             if (registroFinanciero != null) {
-                registroFinancieroService.guardar(registroFinanciero)
+                try {
+                    registroFinancieroService.guardar(registroFinanciero)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
     }

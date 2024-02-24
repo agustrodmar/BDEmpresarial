@@ -9,9 +9,18 @@ import org.springframework.stereotype.Controller
 import org.springframework.context.ApplicationContext
 import org.springframework.beans.factory.annotation.Autowired
 
+
+
+/**
+ * Controlador para la creación de una nueva base de datos.
+ *
+ * Este controlador maneja las acciones del usuario en la pantalla de creación de una nueva base de datos,
+ * como introducir el nombre de la nueva base de datos y guardar la nueva base de datos.
+ *
+ * @property empresaService El servicio para interactuar con las empresas.
+ */
 @Controller
 class NuevaBaseDeDatosController(private val empresaService: EmpresaService) {
-
 
     @Autowired
     private lateinit var context: ApplicationContext
@@ -19,6 +28,11 @@ class NuevaBaseDeDatosController(private val empresaService: EmpresaService) {
     @FXML
     private lateinit var nombreField: TextField
 
+    /**
+     * Maneja la acción del botón para volver al menú.
+     *
+     * Cuando el usuario hace clic en el botón para volver al menú, este método carga la escena del menú de bienvenida.
+     */
     fun handleAtrasButtonAction() {
         try {
             Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
@@ -27,6 +41,12 @@ class NuevaBaseDeDatosController(private val empresaService: EmpresaService) {
         }
     }
 
+    /**
+     * Maneja la acción del botón para guardar una nueva base de datos.
+     *
+     * Cuando el usuario hace clic en el botón para guardar una nueva base de datos, este método crea una nueva base de datos
+     * con el nombre introducido por el usuario y luego guarda la nueva base de datos.
+     */
     @FXML
     fun handleGuardarButtonAction() {
         try {

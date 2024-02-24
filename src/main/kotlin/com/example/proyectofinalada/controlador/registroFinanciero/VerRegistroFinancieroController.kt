@@ -1,6 +1,6 @@
 package com.example.proyectofinalada.controlador.registroFinanciero
 
-import com.example.proyectofinalada.modelo.Empresa
+
 import com.example.proyectofinalada.modelo.RegistroFinanciero
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
 import com.example.proyectofinalada.servicio.empresa.EmpresaActualService
@@ -25,6 +25,13 @@ import java.net.URI
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+/**
+ * Controlador para la visualización de registros financieros.
+ *
+ * Este controlador maneja las acciones del usuario en la pantalla de visualización de registros financieros,
+ * como cargar los registros financieros de la empresa seleccionada y generar una vista HTML de los registros.
+ */
 @Controller
 class VerRegistroFinancieroController {
 
@@ -43,6 +50,13 @@ class VerRegistroFinancieroController {
     @Autowired
     private lateinit var context: ApplicationContext
 
+
+    /**
+     * Inicializa el controlador.
+     *
+     * Este método se llama después de que se ha cargado el archivo FXML. Aquí es donde se realiza cualquier
+     * inicialización necesaria para el controlador.
+     */
     @FXML
     fun initialize() {
         volverAlMenuButton.setOnAction { handleVolverAlMenuButtonAction() }
@@ -50,15 +64,37 @@ class VerRegistroFinancieroController {
         // Carga los registros financieros de la empresa seleccionada
         val empresa = empresaActualService.getEmpresa()
         if (empresa != null) {
-            val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
-            registrosFinancierosList.items = FXCollections.observableArrayList(registrosFinancieros)
+            try {
+                val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
+                registrosFinancierosList.items = FXCollections.observableArrayList(registrosFinancieros)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
+
+    /**
+     * Maneja la acción del botón para volver al menú.
+     *
+     * Cuando el usuario hace clic en el botón para volver al menú, este método carga la escena del menú de bienvenida.
+     */
     fun handleVolverAlMenuButtonAction() {
-        Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        try {
+            Navigator.loadScene("/vista/MenuBienvenida.fxml", context)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
+
+    /**
+     * Genera una vista HTML de los registros financieros.
+     *
+     * Cuando el usuario hace clic en el botón para generar la vista HTML, este método crea una nueva vista HTML de los
+     * registros financieros de la empresa seleccionada y la abre en el navegador predeterminado, para ello se usa
+     * un procedimiento multihilo para compaginar JavaFX y ThymeLeaf en sus distintos ciclos de vida.
+     */
     @FXML
     fun generateHtmlView() {
         Thread {
@@ -72,8 +108,12 @@ class VerRegistroFinancieroController {
             val context = Context()
             val empresa = empresaActualService.getEmpresa()
             if (empresa != null) {
-                val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
-                context.setVariable("registrosFinancieros", registrosFinancieros)
+                try {
+                    val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
+                    context.setVariable("registrosFinancieros", registrosFinancieros)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
             val html = templateEngine.process("registrosFinancieros", context)
@@ -93,7 +133,7 @@ class VerRegistroFinancieroController {
                 } else {
                     val runtime = Runtime.getRuntime()
                     try {
-                        val os = System.getProperty("os.name").toLowerCase()
+                        val os = System.getProperty("os.name").lowercase(Locale.getDefault())
                         if (os.contains("win")) {
                             runtime.exec("cmd /c start $url")
                         } else if (os.contains("mac")) {

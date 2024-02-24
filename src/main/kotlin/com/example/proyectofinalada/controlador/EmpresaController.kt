@@ -14,8 +14,14 @@ import org.springframework.context.ApplicationContext
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
- * El controlador que maneja los datos las empresas
+ * Controlador para la gestión de empresas.
  *
+ * Este controlador maneja las acciones del usuario en la pantalla de gestión de empresas,
+ * como seleccionar una empresa, cargar la pantalla de registros financieros de una empresa y volver al menú.
+ *
+ * @property empresaService El servicio para interactuar con las empresas.
+ * @property registroFinancieroController El controlador para el menú de registros financieros de una empresa.
+ * @property empresaActualService El servicio para gestionar la empresa actualmente seleccionada.
  */
 @Controller
 class EmpresaController(private val empresaService: EmpresaService,
@@ -38,6 +44,11 @@ class EmpresaController(private val empresaService: EmpresaService,
     private lateinit var empresaComboBox: ComboBox<String>
 
 
+    /**
+     * Maneja la acción del botón para volver al menú.
+     *
+     * Cuando el usuario hace clic en el botón para volver al menú, este método carga la escena del menú de bienvenida.
+     */
     @FXML
     fun handleAtrasButtonAction() {
         try {
@@ -47,8 +58,15 @@ class EmpresaController(private val empresaService: EmpresaService,
         }
     }
 
+    /**
+     * Inicializa el controlador.
+     *
+     * Este método se llama después de que se ha cargado el archivo FXML. Aquí es donde puedes realizar cualquier
+     * inicialización necesaria para tu controlador.
+     */
     @FXML
     fun initialize() {
+        // Carga las empresas y las añade al ComboBox
         val empresas = empresaService.encontrarTodo()
         val nombresEmpresas = empresas.map { it.nombre }
         empresaComboBox.items = FXCollections.observableArrayList(nombresEmpresas)
@@ -61,8 +79,13 @@ class EmpresaController(private val empresaService: EmpresaService,
             }
         }
 
+        // Añade un listener al botón de cargar para cargar la escena de registros financieros de la empresa seleccionada
         cargarButton.setOnAction {
-            Navigator.loadScene("/vista/MenuEmpresaRegistro.fxml", context)
+            try {
+                Navigator.loadScene("/vista/MenuEmpresaRegistro.fxml", context)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }
