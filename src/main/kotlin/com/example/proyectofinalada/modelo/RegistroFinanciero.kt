@@ -32,7 +32,7 @@ open class Activo(
     cantidad: BigDecimal
 ) : RegistroFinanciero(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -45,7 +45,7 @@ open class ActivoNoCorriente(
     cantidad: BigDecimal
 ) : Activo(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
 }
 
@@ -56,7 +56,7 @@ class InmovilizadoIntangible(
     concepto: String,
     cantidad: BigDecimal) : ActivoNoCorriente(empresa = empresa, concepto = concepto, cantidad = cantidad) {
     override fun toString(): String {
-        return "$concepto ${cantidad} euros"
+        return "$concepto $cantidad euros"
     }
     }
 

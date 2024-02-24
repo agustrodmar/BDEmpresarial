@@ -18,7 +18,11 @@ import org.thymeleaf.templatemode.TemplateMode
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 import java.awt.Desktop
 import java.io.File
+import java.io.IOException
 import java.io.PrintWriter
+import java.net.URI
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Controller
 class VerRegistroFinancieroController {
@@ -72,13 +76,31 @@ class VerRegistroFinancieroController {
 
         val html = templateEngine.process("registrosFinancieros", context)
 
-        // Guarda la cadena HTML en un archivo
-        val file = File("registrosFinancieros.html")
+        // Guarda la cadena HTML en un archivo con un nombre único
+        val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
+        val filename = "registrosFinancieros$timestamp.html"
+        val file = File(filename)
         PrintWriter(file).use { out -> out.println(html) }
 
         // Abre el archivo en el navegador predeterminado
+        val url = file.toURI().toString()
+
         if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            Desktop.getDesktop().browse(file.toURI())
+            Desktop.getDesktop().browse(URI(url))
+        } else {
+            val runtime = Runtime.getRuntime()
+            try {
+                val os = System.getProperty("os.name").toLowerCase()
+                if (os.contains("win")) {
+                    runtime.exec("cmd /c start $url")
+                } else if (os.contains("mac")) {
+                    runtime.exec("open $url")
+                } else if (os.contains("nix") || os.contains("nux")) {
+                    runtime.exec("xdg-open $url")
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 }
