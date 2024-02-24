@@ -17,7 +17,9 @@ object Navigator {
 
     fun loadScene(fxmlPath: String?, context: ApplicationContext?) {
         try {
-            val fxmlLoader = FXMLLoader(Navigator::class.java.getResource(fxmlPath))
+            val fxmlLoader = FXMLLoader()
+            fxmlLoader.classLoader = this.javaClass.classLoader
+            fxmlLoader.location = Navigator::class.java.getResource(fxmlPath)
             fxmlLoader.setControllerFactory { clazz -> context!!.getBean(clazz) }
             val root: Parent = fxmlLoader.load()
             primaryStage!!.scene = Scene(root)

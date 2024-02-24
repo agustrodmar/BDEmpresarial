@@ -5,6 +5,7 @@ import com.example.proyectofinalada.modelo.RegistroFinanciero
 import com.example.proyectofinalada.servicio.RegistroFinancieroService
 import com.example.proyectofinalada.servicio.empresa.EmpresaActualService
 import com.example.proyectofinalada.util.Navigator
+import javafx.application.Platform
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
@@ -60,47 +61,51 @@ class VerRegistroFinancieroController {
 
     @FXML
     fun generateHtmlView() {
-        val templateResolver = ClassLoaderTemplateResolver()
-        templateResolver.suffix = ".html"
-        templateResolver.templateMode = TemplateMode.HTML
+        Thread {
+            val templateResolver = ClassLoaderTemplateResolver()
+            templateResolver.suffix = ".html"
+            templateResolver.templateMode = TemplateMode.HTML
 
-        val templateEngine = TemplateEngine()
-        templateEngine.setTemplateResolver(templateResolver)
+            val templateEngine = TemplateEngine()
+            templateEngine.setTemplateResolver(templateResolver)
 
-        val context = Context()
-        val empresa = empresaActualService.getEmpresa()
-        if (empresa != null) {
-            val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
-            context.setVariable("registrosFinancieros", registrosFinancieros)
-        }
-
-        val html = templateEngine.process("registrosFinancieros", context)
-
-        // Guarda la cadena HTML en un archivo con un nombre único
-        val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-        val filename = "registrosFinancieros$timestamp.html"
-        val file = File(filename)
-        PrintWriter(file).use { out -> out.println(html) }
-
-        // Abre el archivo en el navegador predeterminado
-        val url = file.toURI().toString()
-
-        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            Desktop.getDesktop().browse(URI(url))
-        } else {
-            val runtime = Runtime.getRuntime()
-            try {
-                val os = System.getProperty("os.name").toLowerCase()
-                if (os.contains("win")) {
-                    runtime.exec("cmd /c start $url")
-                } else if (os.contains("mac")) {
-                    runtime.exec("open $url")
-                } else if (os.contains("nix") || os.contains("nux")) {
-                    runtime.exec("xdg-open $url")
-                }
-            } catch (e: IOException) {
-                e.printStackTrace()
+            val context = Context()
+            val empresa = empresaActualService.getEmpresa()
+            if (empresa != null) {
+                val registrosFinancieros = registroFinancieroService.encontrarPorEmpresa(empresa)
+                context.setVariable("registrosFinancieros", registrosFinancieros)
             }
-        }
+
+            val html = templateEngine.process("registrosFinancieros", context)
+
+            // Guarda la cadena HTML en un archivo con un nombre único
+            val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
+            val filename = "registrosFinancieros$timestamp.html"
+            val file = File(filename)
+            PrintWriter(file).use { out -> out.println(html) }
+
+            // Abre el archivo en el navegador predeterminado
+            Platform.runLater {
+                val url = file.toURI().toString()
+
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    Desktop.getDesktop().browse(URI(url))
+                } else {
+                    val runtime = Runtime.getRuntime()
+                    try {
+                        val os = System.getProperty("os.name").toLowerCase()
+                        if (os.contains("win")) {
+                            runtime.exec("cmd /c start $url")
+                        } else if (os.contains("mac")) {
+                            runtime.exec("open $url")
+                        } else if (os.contains("nix") || os.contains("nux")) {
+                            runtime.exec("xdg-open $url")
+                        }
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+        }.start()
     }
 }
