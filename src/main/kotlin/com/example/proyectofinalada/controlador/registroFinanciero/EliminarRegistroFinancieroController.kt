@@ -20,7 +20,8 @@ import org.springframework.stereotype.Controller
  * Este controlador maneja la acción del usuario de eliminar un registro financiero.
  */
 @Controller
-class EliminarRegistroFinancieroController {
+class
+EliminarRegistroFinancieroController {
 
     @Autowired
     private lateinit var registroFinancieroService: RegistroFinancieroService
